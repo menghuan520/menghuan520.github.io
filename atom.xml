@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://menghuan520.github.io</id>
+    <title>Gridea</title>
+    <updated>2023-12-03T15:43:46.006Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://menghuan520.github.io"/>
+    <link rel="self" href="https://menghuan520.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://menghuan520.github.io/images/avatar.png</logo>
+    <icon>https://menghuan520.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Windows 安装并编译 Chromium 步骤]]></title>
+        <id>https://menghuan520.github.io/post/windows-an-zhuang-bing-bian-yi-chromium-bu-zou/</id>
+        <link href="https://menghuan520.github.io/post/windows-an-zhuang-bing-bian-yi-chromium-bu-zou/">
+        </link>
+        <updated>2023-12-03T15:18:21.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="windows-安装并编译-chromium-步骤">Windows 安装并编译 Chromium 步骤</h1>
+<h1 id="1-下载depot_toolshttpssrcchromiumorgsvntrunktoolsdepot_toolszip">1、下载depot_tools：https://src.chromium.org/svn/trunk/tools/depot_tools.zip</h1>
+<h1 id="2-解压-depot_tools-到-dsrcchromium">2、解压 depot_tools 到 D:\src\chromium\</h1>
+<h1 id="3-设置环境变量">3、设置环境变量</h1>
+<h2 id="pathdsrcchromiumdepot_tools">path=D:\src\chromium\depot_tools</h2>
+<h2 id="vs2022_installdprogram-filesmicrosoft-visual-studio2022professional">vs2022_install=D:\Program Files\Microsoft Visual Studio\2022\Professional</h2>
+<h2 id="depot_tools_win_toolchain0">DEPOT_TOOLS_WIN_TOOLCHAIN=0</h2>
+<h1 id="4-管理员权限启动-cmd">4、管理员权限启动 CMD</h1>
+<h2 id="输入">输入：</h2>
+<h3 id="cd-dsrcchromium">cd D:\src\chromium\</h3>
+<h3 id="set-http_proxyhttp12700110809-set-https_proxyhttp12700110809">set http_proxy=http://127.0.0.1:10809 &amp; set https_proxy=http://127.0.0.1:10809</h3>
+<h3 id="gclient">gclient</h3>
+<h3 id="git-config-global-httpproxy-http_proxy">git config –-global http.proxy %http_proxy%</h3>
+<h3 id="git-config-global-httpsproxy-https_proxy">git config –-global https.proxy %https_proxy%</h3>
+<h3 id="git-config-global-username-yourname">git config --global user.name &quot;yourname&quot;</h3>
+<h3 id="git-config-global-useremail-yournamechromiumorg">git config --global user.email &quot;yourname@chromium.org&quot;</h3>
+<h3 id="git-config-global-coreautocrlf-false">git config --global core.autocrlf false</h3>
+<h3 id="git-config-global-corefilemode-false">git config --global core.filemode false</h3>
+<h3 id="git-config-global-branchautosetuprebase-always">git config --global branch.autosetuprebase always</h3>
+<h3 id="git-config-global-corelongpaths-true">git config --global core.longpaths true</h3>
+<h3 id="fetch-no-history-chromium">fetch --no-history chromium</h3>
+<h3 id="gclient-sync">gclient sync</h3>
+<h3 id="cd-src">cd src</h3>
+<h3 id="git-config-global-unset-httpproxy">git config --global --unset http.proxy</h3>
+<h3 id="git-config-global-unset-httpsproxy">git config --global --unset https.proxy</h3>
+<h1 id="5-生成工程并编译">5、生成工程并编译</h1>
+<h2 id="生成debugx64工程">生成DebugX64工程</h2>
+<h3 id="gn-gen-outdebugx64-idevs-argstarget_oswin-target_cpux64-is_component_buildtrue-is_debugtrue-is_official_buildfalse-remove_webcore_debug_symbolsfalse-google_api_keyfalse-google_default_client_idfalse-google_default_client_secretfalse-proprietary_codecstrue-media_use_ffmpegtrue-ffmpeg_brandingchrome-enable_naclfalse-enable_mse_mpeg2ts_stream_parsertrue-enable_hls_sample_aestrue-enable_ac3_eac3_audio_demuxingtrue-enable_hevc_demuxingtrue-enable_webrtctrue-rtc_use_h264true-rtc_use_ltotrue-use_openh264true-enable_widevinetrue-media_use_libvpxtrue">gn gen out\DebugX64 --ide=vs  --args=&quot;target_os=&quot;win&quot; target_cpu=&quot;x64&quot; is_component_build=true is_debug=true is_official_build=false remove_webcore_debug_symbols=false google_api_key=false google_default_client_id=false google_default_client_secret=false proprietary_codecs=true media_use_ffmpeg=true ffmpeg_branding=&quot;Chrome&quot; enable_nacl=false enable_mse_mpeg2ts_stream_parser=true enable_hls_sample_aes=true enable_ac3_eac3_audio_demuxing=true enable_hevc_demuxing=true enable_webrtc=true rtc_use_h264=true rtc_use_lto=true use_openh264=true enable_widevine=true media_use_libvpx=true &quot;</h3>
+<h2 id="编译debugx64版本">编译DebugX64版本</h2>
+<h3 id="autoninja-c-outdebugx64-chrome">autoninja -C out\DebugX64 chrome</h3>
+<h2 id="生成-releasex64-工程">生成 ReleaseX64 工程</h2>
+<h3 id="gn-gen-outreleasex64-idevs-argstarget_oswin-target_cpux64-is_component_buildfalse-is_debugfalse-is_official_buildtrue-remove_webcore_debug_symbolstrue-google_api_keyfalse-google_default_client_idfalse-google_default_client_secretfalse-proprietary_codecstrue-media_use_ffmpegtrue-ffmpeg_brandingchrome-enable_naclfalse-enable_mse_mpeg2ts_stream_parsertrue-enable_hls_sample_aestrue-enable_ac3_eac3_audio_demuxingtrue-enable_hevc_demuxingtrue-enable_webrtctrue-rtc_use_h264true-rtc_use_ltotrue-use_openh264true-enable_widevinetrue-media_use_libvpxtrue">gn gen out\ReleaseX64 --ide=vs  --args=&quot;target_os=&quot;win&quot; target_cpu=&quot;x64&quot; is_component_build=false is_debug=false is_official_build=true remove_webcore_debug_symbols=true google_api_key=false google_default_client_id=false google_default_client_secret=false proprietary_codecs=true media_use_ffmpeg=true ffmpeg_branding=&quot;Chrome&quot; enable_nacl=false enable_mse_mpeg2ts_stream_parser=true enable_hls_sample_aes=true enable_ac3_eac3_audio_demuxing=true enable_hevc_demuxing=true enable_webrtc=true rtc_use_h264=true rtc_use_lto=true use_openh264=true enable_widevine=true media_use_libvpx=true &quot;</h3>
+<h2 id="编译releasex64版本且编译mini_installerexe">编译ReleaseX64版本，且编译mini_installer.exe</h2>
+<h3 id="autoninja-c-outreleasex64-mini_installer">autoninja -C out\ReleaseX64 mini_installer</h3>
+]]></content>
+    </entry>
+</feed>
